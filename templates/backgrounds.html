@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Backgrounds - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Backgrounds</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Background</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/backgrounds">
+                    <div class="mb-3">
+                        <label for="system" class="form-label">System</label>
+                        <select class="form-select" id="system" name="system" required>
+                            <option value="">Choose system...</option>
+                            <option value="worlds-without-number">Worlds Without Number</option>
+                            <option value="cities-without-number">Cities Without Number</option>
+                            <option value="stars-without-number">Stars Without Number</option>
+                            <option value="godbound">GodBound</option>
+                            <option value="ashes-without-number">Ashes Without Number</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter background name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="freeSkill" class="form-label">Free Skill</label>
+                        <input type="text" class="form-control" id="freeSkill" name="free_skill" placeholder="Enter free skill" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Quick Skill</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="quick_skill_1" placeholder="First quick skill" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="quick_skill_2" placeholder="Second quick skill" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Growth</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="growth_1" placeholder="Growth option 1" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="growth_2" placeholder="Growth option 2" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="growth_3" placeholder="Growth option 3" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="growth_4" placeholder="Growth option 4" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="growth_5" placeholder="Growth option 5" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="growth_6" placeholder="Growth option 6" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Learning</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_1" placeholder="Learning option 1" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_2" placeholder="Learning option 2" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_3" placeholder="Learning option 3" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_4" placeholder="Learning option 4" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_5" placeholder="Learning option 5" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_6" placeholder="Learning option 6" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_7" placeholder="Learning option 7" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="learning_8" placeholder="Learning option 8" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Background</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Backgrounds List</h5>
+            </div>
+            <div class="card-body">
+                {% if backgrounds %}
+                    <div class="list-group list-group-flush">
+                        {% for background in backgrounds %}
+                        <div class="list-group-item bg-dark text-light border-secondary mb-3">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ background.name }}</h6>
+                                <small class="text-muted">{{ background.system }}</small>
+                            </div>
+                            <p class="mb-1">{{ background.description }}</p>
+                            <small class="text-muted">ID: {{ background.id[:8] }}...</small>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <strong>Free Skill:</strong> {{ background.free_skill }}<br>
+                                    <strong>Quick Skills:</strong> {{ background.quick_skills[0] }}, {{ background.quick_skills[1] }}
+                                </small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No backgrounds added yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

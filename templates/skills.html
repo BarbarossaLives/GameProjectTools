@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Skills - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Skills</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Skill</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="skillName" class="form-label">Skill Name</label>
+                        <input type="text" class="form-control" id="skillName" placeholder="Enter skill name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="system" class="form-label">System</label>
+                        <select class="form-select" id="system" name="system" required>
+                            <option value="">Choose system...</option>
+                            <option value="worlds-without-number">Worlds Without Number</option>
+                            <option value="cities-without-number">Cities Without Number</option>
+                            <option value="stars-without-number">Stars Without Number</option>
+                            <option value="godbound">GodBound</option>
+                            <option value="ashes-without-number">Ashes Without Number</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="skillDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="skillDescription" rows="3" placeholder="Enter skill description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Skill</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Skills List</h5>
+            </div>
+            <div class="card-body">
+                <p>Skills will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

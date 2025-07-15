@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Character - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Character Management</h2>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card bg-dark text-light">
+            <div class="card-body">
+                <h5 class="card-title">Character Tools</h5>
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="/skills" class="btn btn-primary w-100">Skills</a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/backgrounds" class="btn btn-primary w-100">Backgrounds</a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/class" class="btn btn-primary w-100">Class</a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="/foci" class="btn btn-primary w-100">Foci</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card bg-dark text-light">
+            <div class="card-body">
+                <h5 class="card-title">Character Creation</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <button class="btn btn-success w-100">Create Character</button>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <button class="btn btn-info w-100">Create NPC</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+    
+    

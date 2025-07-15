@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Class - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Class</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Class</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="className" class="form-label">Class Name</label>
+                        <input type="text" class="form-control" id="className" placeholder="Enter class name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="system" class="form-label">System</label>
+                        <select class="form-select" id="system" name="system" required>
+                            <option value="">Choose system...</option>
+                            <option value="worlds-without-number">Worlds Without Number</option>
+                            <option value="cities-without-number">Cities Without Number</option>
+                            <option value="stars-without-number">Stars Without Number</option>
+                            <option value="godbound">GodBound</option>
+                            <option value="ashes-without-number">Ashes Without Number</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="classDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="classDescription" rows="3" placeholder="Enter class description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Class Ability</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="class_ability_1" placeholder="First class ability" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="class_ability_2" placeholder="Second class ability" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hit Dice</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_1" placeholder="Level 1" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_2" placeholder="Level 2" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_3" placeholder="Level 3" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_4" placeholder="Level 4" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_5" placeholder="Level 5" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_6" placeholder="Level 6" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_7" placeholder="Level 7" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_8" placeholder="Level 8" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_9" placeholder="Level 9" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="hit_dice_10" placeholder="Level 10" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Attack Bonus</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_1" placeholder="Level 1" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_2" placeholder="Level 2" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_3" placeholder="Level 3" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_4" placeholder="Level 4" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_5" placeholder="Level 5" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_6" placeholder="Level 6" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_7" placeholder="Level 7" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_8" placeholder="Level 8" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_9" placeholder="Level 9" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="attack_bonus_10" placeholder="Level 10" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Focus Picks</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_1" placeholder="Level 1" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_2" placeholder="Level 2" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_3" placeholder="Level 3" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_4" placeholder="Level 4" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_5" placeholder="Level 5" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_6" placeholder="Level 6" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_7" placeholder="Level 7" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_8" placeholder="Level 8" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_9" placeholder="Level 9" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" name="focus_picks_10" placeholder="Level 10" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Class</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Classes List</h5>
+            </div>
+            <div class="card-body">
+                <p>Classes will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

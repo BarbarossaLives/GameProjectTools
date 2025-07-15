@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}World - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">World Builder</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">World Map</h5>
+            </div>
+            <div class="card-body">
+                <div class="bg-secondary p-4 rounded text-center">
+                    <p class="text-light mb-0">Interactive World Map Coming Soon</p>
+                    <small class="text-light">Drag and drop to create locations, cities, and landmarks</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">World Details</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="worldName" class="form-label">World Name</label>
+                        <input type="text" class="form-control" id="worldName" placeholder="Enter world name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="worldDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="worldDescription" rows="3" placeholder="Describe your world..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="worldTheme" class="form-label">Theme</label>
+                        <select class="form-select" id="worldTheme">
+                            <option selected>Choose theme...</option>
+                            <option value="fantasy">High Fantasy</option>
+                            <option value="medieval">Medieval</option>
+                            <option value="steampunk">Steampunk</option>
+                            <option value="post-apocalyptic">Post-Apocalyptic</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save World</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Locations</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item bg-dark text-light border-secondary">
+                        <h6 class="mb-1">The City of Eldoria</h6>
+                        <p class="mb-1">A bustling trade city known for its magical academy.</p>
+                        <small>Capital City</small>
+                    </div>
+                    <div class="list-group-item bg-dark text-light border-secondary">
+                        <h6 class="mb-1">Darkwood Forest</h6>
+                        <p class="mb-1">A mysterious forest filled with ancient ruins.</p>
+                        <small>Wilderness</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">NPCs</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item bg-dark text-light border-secondary">
+                        <h6 class="mb-1">King Aldric the Wise</h6>
+                        <p class="mb-1">Ruler of Eldoria, known for his fair judgment.</p>
+                        <small>Royalty</small>
+                    </div>
+                    <div class="list-group-item bg-dark text-light border-secondary">
+                        <h6 class="mb-1">Merchant Zara</h6>
+                        <p class="mb-1">A shrewd trader with connections everywhere.</p>
+                        <small>Merchant</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Foci - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Foci</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Focus</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="focusName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="focusName" name="focus_name" placeholder="Enter focus name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="system" class="form-label">System</label>
+                        <select class="form-select" id="system" name="system" required>
+                            <option value="">Choose system...</option>
+                            <option value="worlds-without-number">Worlds Without Number</option>
+                            <option value="cities-without-number">Cities Without Number</option>
+                            <option value="stars-without-number">Stars Without Number</option>
+                            <option value="godbound">GodBound</option>
+                            <option value="ashes-without-number">Ashes Without Number</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="focusDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="focusDescription" name="focus_description" rows="3" placeholder="Enter focus description" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="level1" class="form-label">Level 1</label>
+                        <textarea class="form-control" id="level1" name="level_1" rows="3" placeholder="Enter level 1 ability" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="level2" class="form-label">Level 2</label>
+                        <textarea class="form-control" id="level2" name="level_2" rows="3" placeholder="Enter level 2 ability" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Focus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Foci List</h5>
+            </div>
+            <div class="card-body">
+                <p>Foci will be displayed here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
