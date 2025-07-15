@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Armor - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Armor Database</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Armor</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="armorName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="armorName" name="name" placeholder="Enter armor name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="system" class="form-label">System</label>
+                        <select class="form-select" id="system" name="system">
+                            <option selected>Choose system...</option>
+                            <option value="worlds-without-number">World Without Number</option>
+                            <option value="cities-without-number">Cities Without Number</option>
+                            <option value="stars-without-number">Stars Without Number</option>
+                            <option value="godbound">Godbound</option>
+                            <option value="ashes-without-number">Ashes Without Number</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="type" name="type" placeholder="Enter armor type">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ac" class="form-label">AC</label>
+                        <input type="text" class="form-control" id="ac" name="ac" placeholder="Enter armor class (AC)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cost" class="form-label">Cost</label>
+                        <input type="text" class="form-control" id="cost" name="cost" placeholder="Enter cost">
+                    </div>
+                    <div class="mb-3">
+                        <label for="weight" class="form-label">Weight</label>
+                        <input type="text" class="form-control" id="weight" name="weight" placeholder="Enter weight">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Armor</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Armor Library</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">This page will list and manage armor for your TTRPG campaigns.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

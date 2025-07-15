@@ -199,5 +199,33 @@ async def world(request: Request):
 async def items(request: Request):
     return templates.TemplateResponse("items.html", {"request": request})
 
+@app.get("/adventure")
+async def adventure(request: Request):
+    return templates.TemplateResponse("adventure.html", {"request": request})
+
+@app.get("/weapons")
+async def weapons(request: Request):
+    return templates.TemplateResponse("weapons.html", {"request": request})
+
+@app.get("/armor")
+async def armor(request: Request):
+    return templates.TemplateResponse("armor.html", {"request": request})
+
+@app.get("/beast-transport")
+async def beast_transport(request: Request):
+    return templates.TemplateResponse("beast-transport.html", {"request": request})
+
+@app.get("/service-living")
+async def service_living(request: Request):
+    return templates.TemplateResponse("service-living.html", {"request": request})
+
+@app.get("/hirelings")
+async def hirelings(request: Request):
+    return templates.TemplateResponse("hirelings.html", {"request": request})
+
+@app.get("/gear")
+async def gear(request: Request):
+    return templates.TemplateResponse("gear.html", {"request": request})
+
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8001, reload=True) 

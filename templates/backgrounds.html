@@ -18,6 +18,10 @@
             <div class="card-body">
                 <form method="POST" action="/backgrounds">
                     <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter background name" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="system" class="form-label">System</label>
                         <select class="form-select" id="system" name="system" required>
                             <option value="">Choose system...</option>
@@ -27,10 +31,6 @@
                             <option value="godbound">GodBound</option>
                             <option value="ashes-without-number">Ashes Without Number</option>
                         </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter background name" required>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>

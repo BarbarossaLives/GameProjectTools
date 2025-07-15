@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Beasts and Transport - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Beasts and Transport Database</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Beast or Transport</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="beastName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="beastName" name="name" placeholder="Enter name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="system" class="form-label">System</label>
+                        <select class="form-select" id="system" name="system">
+                            <option selected>Choose system...</option>
+                            <option value="worlds-without-number">Worlds Without Number</option>
+                            <option value="cities-without-number">Cities Without Number</option>
+                            <option value="stars-without-number">Stars Without Number</option>
+                            <option value="godbound">Godbound</option>
+                            <option value="ashes-without-number">Ashes Without Number</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cost" class="form-label">Cost</label>
+                        <input type="text" class="form-control" id="cost" name="cost" placeholder="Enter cost">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Beast/Transport</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Beasts and Transport Library</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">This page will list and manage beasts and transport options for your TTRPG campaigns.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

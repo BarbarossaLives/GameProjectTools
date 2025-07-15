@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Adventure Gear - TTRPG Game Tools{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Adventure Gear Database</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Adventure Gear</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="gearName" class="form-label">Gear Name</label>
+                        <input type="text" class="form-control" id="gearName" placeholder="Enter gear name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="system" class="form-label">System</label>
+                        <select class="form-select" id="system">
+                            <option selected>Choose system...</option>
+                            <option value="worlds-without-number">Worlds Without Number</option>
+                            <option value="cities-without-number">Cities Without Number</option>
+                            <option value="stars-without-number">Stars without Number</option>
+                            <option value="godbound">Godbound</option>
+                            <option value="ashes-without-number">Ashes Without Number</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="gearDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="gearDescription" rows="3" placeholder="Describe the gear..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gearCost" class="form-label">Cost</label>
+                        <input type="text" class="form-control" id="gearCost" placeholder="Enter cost">
+                    </div>
+                    <div class="mb-3">
+                        <label for="gearWeight" class="form-label">Weight</label>
+                        <input type="text" class="form-control" id="gearWeight" placeholder="Enter weight">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Gear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card bg-dark text-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Adventure Gear Library</h5>
+            </div>
+          
+        </div>
+    </div>
+</div>
+{% endblock %} 
