@@ -123,6 +123,30 @@ def init_database():
         )
     ''')
     
+    # Create arts table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS arts (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            class_name TEXT NOT NULL,
+            system TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # Create adventure_gear table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS adventure_gear (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            system TEXT NOT NULL,
+            description TEXT NOT NULL,
+            cost TEXT NOT NULL,
+            weight TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
     conn.commit()
     conn.close()
 
@@ -340,6 +364,80 @@ def add_focus_to_db(focus_data):
     conn.commit()
     conn.close()
 
+def get_all_arts():
+    """Retrieve all arts from database in alphabetical order"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM arts ORDER BY name ASC')
+    rows = cursor.fetchall()
+    arts = []
+    for row in rows:
+        art = {
+            "id": row[0],
+            "name": row[1],
+            "class_name": row[2],
+            "system": row[3]
+        }
+        arts.append(art)
+    conn.close()
+    return arts
+
+def add_art_to_db(art_data):
+    """Add a new art to the database"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO arts (
+            id, name, class_name, system
+        ) VALUES (?, ?, ?, ?)
+    ''', (
+        art_data["id"],
+        art_data["name"],
+        art_data["class_name"],
+        art_data["system"]
+    ))
+    conn.commit()
+    conn.close()
+
+def get_all_adventure_gear():
+    """Retrieve all adventure gear from database in alphabetical order"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM adventure_gear ORDER BY name ASC')
+    rows = cursor.fetchall()
+    gear = []
+    for row in rows:
+        gear_item = {
+            "id": row[0],
+            "name": row[1],
+            "system": row[2],
+            "description": row[3],
+            "cost": row[4],
+            "weight": row[5]
+        }
+        gear.append(gear_item)
+    conn.close()
+    return gear
+
+def add_adventure_gear_to_db(gear_data):
+    """Add a new adventure gear item to the database"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO adventure_gear (
+            id, name, system, description, cost, weight
+        ) VALUES (?, ?, ?, ?, ?, ?)
+    ''', (
+        gear_data["id"],
+        gear_data["name"],
+        gear_data["system"],
+        gear_data["description"],
+        gear_data["cost"],
+        gear_data["weight"]
+    ))
+    conn.commit()
+    conn.close()
+
 # Initialize database on startup
 init_database()
 
@@ -538,6 +636,54 @@ async def add_focus(
     
     return RedirectResponse(url="/foci", status_code=303)
 
+@app.get("/arts")
+async def arts_page(request: Request):
+    arts_list = get_all_arts()
+    return templates.TemplateResponse("arts.html", {"request": request, "arts": arts_list})
+
+@app.post("/arts")
+async def add_art(
+    request: Request,
+    name: str = Form(...),
+    class_name: str = Form(...),
+    system: str = Form(...)
+):
+    unique_id = str(uuid.uuid4())
+    art = {
+        "id": unique_id,
+        "name": name,
+        "class_name": class_name,
+        "system": system
+    }
+    add_art_to_db(art)
+    return RedirectResponse(url="/arts", status_code=303)
+
+@app.get("/adventure")
+async def adventure(request: Request):
+    gear_list = get_all_adventure_gear()
+    return templates.TemplateResponse("adventure.html", {"request": request, "adventure_gear": gear_list})
+
+@app.post("/adventure")
+async def add_adventure_gear(
+    request: Request,
+    gearName: str = Form(...),
+    system: str = Form(...),
+    gearDescription: str = Form(...),
+    gearCost: str = Form(...),
+    gearWeight: str = Form(...)
+):
+    unique_id = str(uuid.uuid4())
+    gear = {
+        "id": unique_id,
+        "name": gearName,
+        "system": system,
+        "description": gearDescription,
+        "cost": gearCost,
+        "weight": gearWeight
+    }
+    add_adventure_gear_to_db(gear)
+    return RedirectResponse(url="/adventure", status_code=303)
+
 @app.get("/world")
 async def world(request: Request):
     return templates.TemplateResponse("world.html", {"request": request})
@@ -545,10 +691,6 @@ async def world(request: Request):
 @app.get("/items")
 async def items(request: Request):
     return templates.TemplateResponse("items.html", {"request": request})
-
-@app.get("/adventure")
-async def adventure(request: Request):
-    return templates.TemplateResponse("adventure.html", {"request": request})
 
 @app.get("/weapons")
 async def weapons(request: Request):
