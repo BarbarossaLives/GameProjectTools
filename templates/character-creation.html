@@ -1,0 +1,479 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Character Creation</h1>
+  <div class="row">
+    <div class="col-2">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body p-2">
+          <form>
+            <div class="mb-2">
+              <label for="characterName" class="form-label label-xs">Name</label>
+              <input type="text" class="form-control form-control-xs" id="characterName" name="characterName" value="" readonly>
+            </div>
+            <div class="mb-2">
+              <label for="homeland" class="form-label label-xs">Homeland</label>
+              <input type="text" class="form-control form-control-xs" id="homeland" name="homeland" value="" readonly>
+            </div>
+            <div class="mb-2">
+              <label for="occupation" class="form-label label-xs">Occupation</label>
+              <input type="text" class="form-control form-control-xs" id="occupation" name="occupation" value="" readonly>
+            </div>
+            <div class="mb-2">
+              <label for="race" class="form-label label-xs">Race</label>
+              <input type="text" class="form-control form-control-xs" id="race" name="race" value="Human" readonly>
+            </div>
+            <div class="mb-2">
+              <label for="background" class="form-label label-xs">Background</label>
+              <input type="text" class="form-control form-control-xs" id="background" name="background" value="" readonly>
+            </div>
+            <div class="mb-2">
+              <label for="backgroundDetails" class="form-label label-xs">Background Details</label>
+              <textarea class="form-control form-control-xs" id="backgroundDetails" name="backgroundDetails" rows="2" readonly></textarea>
+            </div>
+            <div class="mb-2">
+              <label for="class" class="form-label label-xs">Class</label>
+              <input type="text" class="form-control form-control-xs" id="class" name="class" value="" readonly>
+            </div>
+            <div class="mb-2">
+              <label for="classBenefits" class="form-label label-xs">Class Benefits</label>
+              <textarea class="form-control form-control-xs" id="classBenefits" name="classBenefits" rows="2" readonly></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Other columns remain as placeholders -->
+    <div class="col-2">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body text-center">
+          <span class="small">Column 2</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body text-center">
+          <span class="small">Column 3</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body text-center">
+          <span class="small">Column 4</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body text-center">
+          <span class="small">Column 5</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card bg-dark text-light mb-4 d-flex flex-column justify-content-between" style="height:100%">
+        <div class="card-body d-flex flex-column align-items-end p-2">
+          <label class="form-label label-xs mb-2 w-100 text-end">Creation Stages</label>
+          <a href="#" class="btn btn-primary btn-sm w-100 mb-2" data-bs-toggle="modal" data-bs-target="#detailsModal">Details</a>
+          <a href="#" class="btn btn-primary btn-sm w-100 mb-2" data-bs-toggle="modal" data-bs-target="#attributesModal">Attributes</a>
+          <a href="#" class="btn btn-primary btn-sm w-100 mb-2" data-bs-toggle="modal" data-bs-target="#backgroundModal">Background</a>
+          <a href="#" class="btn btn-primary btn-sm w-100">Class</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details Modal -->
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">Edit Character Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="detailsModalForm">
+          <div class="modal-body">
+            <div class="mb-2">
+              <label for="modalCharacterName" class="form-label label-xs">Name</label>
+              <input type="text" class="form-control form-control-xs" id="modalCharacterName" name="modalCharacterName">
+            </div>
+            <div class="mb-2">
+              <label for="modalHomeland" class="form-label label-xs">Homeland</label>
+              <input type="text" class="form-control form-control-xs" id="modalHomeland" name="modalHomeland">
+            </div>
+            <div class="mb-2">
+              <label for="modalOccupation" class="form-label label-xs">Occupation</label>
+              <input type="text" class="form-control form-control-xs" id="modalOccupation" name="modalOccupation">
+            </div>
+            <div class="mb-2">
+              <label for="modalRace" class="form-label label-xs">Race</label>
+              <input type="text" class="form-control form-control-xs" id="modalRace" name="modalRace" value="Human">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attributes Modal -->
+  <div class="modal fade" id="attributesModal" tabindex="-1" aria-labelledby="attributesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="attributesModalLabel">Assign Attributes</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label label-xs">Random Rolls</label>
+            <div class="d-flex align-items-center mb-2" id="randomRollsRow">
+              <!-- Random numbers will be inserted here by JS -->
+              <span id="randomRollsValues" class="me-2"></span>
+              <button type="button" class="btn btn-secondary btn-xs ms-2" id="randomRollsBtn">Random</button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label label-xs">Standard Array</label>
+            <div class="d-flex align-items-center mb-2">
+              <span id="arrayValues" class="me-2">14, 12, 11, 10, 9, 7</span>
+              <button type="button" class="btn btn-secondary btn-xs ms-2" id="arrayBtn">Array</button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label label-xs">Assign to Attributes</label>
+            <div id="assignableNumbers" class="mb-2 d-flex flex-wrap gap-2"></div>
+            <form id="attributeAssignForm">
+              <div class="row g-1">
+                <div class="col-4 mb-1">
+                  <label for="assignSTR" class="form-label label-xs">STR</label>
+                  <input type="text" class="form-control form-control-xs droppable-attr" id="assignSTR" name="assignSTR" readonly data-attr="STR">
+                </div>
+                <div class="col-4 mb-1">
+                  <label for="assignDEX" class="form-label label-xs">DEX</label>
+                  <input type="text" class="form-control form-control-xs droppable-attr" id="assignDEX" name="assignDEX" readonly data-attr="DEX">
+                </div>
+                <div class="col-4 mb-1">
+                  <label for="assignCON" class="form-label label-xs">CON</label>
+                  <input type="text" class="form-control form-control-xs droppable-attr" id="assignCON" name="assignCON" readonly data-attr="CON">
+                </div>
+                <div class="col-4 mb-1">
+                  <label for="assignINT" class="form-label label-xs">INT</label>
+                  <input type="text" class="form-control form-control-xs droppable-attr" id="assignINT" name="assignINT" readonly data-attr="INT">
+                </div>
+                <div class="col-4 mb-1">
+                  <label for="assignWIS" class="form-label label-xs">WIS</label>
+                  <input type="text" class="form-control form-control-xs droppable-attr" id="assignWIS" name="assignWIS" readonly data-attr="WIS">
+                </div>
+                <div class="col-4 mb-1">
+                  <label for="assignCHA" class="form-label label-xs">CHA</label>
+                  <input type="text" class="form-control form-control-xs droppable-attr" id="assignCHA" name="assignCHA" readonly data-attr="CHA">
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- Placeholder for further content below -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Modal -->
+  <div class="modal fade" id="backgroundModal" tabindex="-1" aria-labelledby="backgroundModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="backgroundModalLabel">Select Background</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="backgroundsList">
+            <div class="text-muted">Loading backgrounds...</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New row for ability scores and HP/system strain/saves -->
+  <div class="row">
+    <div class="col-1">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body p-2">
+          <form>
+            <div class="mb-1">
+              <label for="str" class="form-label label-xs">STR</label>
+              <input type="text" class="form-control form-control-xs" id="str" name="str">
+            </div>
+            <div class="mb-1">
+              <label for="dex" class="form-label label-xs">DEX</label>
+              <input type="text" class="form-control form-control-xs" id="dex" name="dex">
+            </div>
+            <div class="mb-1">
+              <label for="con" class="form-label label-xs">CON</label>
+              <input type="text" class="form-control form-control-xs" id="con" name="con">
+            </div>
+            <div class="mb-1">
+              <label for="int" class="form-label label-xs">INT</label>
+              <input type="text" class="form-control form-control-xs" id="int" name="int">
+            </div>
+            <div class="mb-1">
+              <label for="wis" class="form-label label-xs">WIS</label>
+              <input type="text" class="form-control form-control-xs" id="wis" name="wis">
+            </div>
+            <div class="mb-1">
+              <label for="cha" class="form-label label-xs">CHA</label>
+              <input type="text" class="form-control form-control-xs" id="cha" name="cha">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-1">
+      <div class="card bg-dark text-light mb-4">
+        <div class="card-body p-2">
+          <form>
+            <div class="mb-1">
+              <label for="hitPoints" class="form-label label-xs">Hit Points</label>
+              <input type="text" class="form-control form-control-xs" id="hitPoints" name="hitPoints">
+            </div>
+            <div class="mb-1">
+              <label for="current" class="form-label label-xs">Current</label>
+              <input type="text" class="form-control form-control-xs" id="current" name="current">
+            </div>
+            <div class="mb-1">
+              <label for="systemStrain" class="form-label label-xs">System Strain</label>
+              <input type="text" class="form-control form-control-xs" id="systemStrain" name="systemStrain">
+            </div>
+            <div class="mb-1">
+              <label class="form-label label-xs">Saves</label>
+              <div class="ms-0">
+                <div class="mb-1">
+                  <label for="savePhysical" class="form-label label-xs">Physical</label>
+                  <input type="text" class="form-control form-control-xs" id="savePhysical" name="savePhysical">
+                </div>
+                <div class="mb-1">
+                  <label for="saveEvasion" class="form-label label-xs">Evasion</label>
+                  <input type="text" class="form-control form-control-xs" id="saveEvasion" name="saveEvasion">
+                </div>
+                <div class="mb-1">
+                  <label for="saveMental" class="form-label label-xs">Mental</label>
+                  <input type="text" class="form-control form-control-xs" id="saveMental" name="saveMental">
+                </div>
+                <div class="mb-1">
+                  <label for="saveLuck" class="form-label label-xs">Luck</label>
+                  <input type="text" class="form-control form-control-xs" id="saveLuck" name="saveLuck">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-10"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Prefill modal with current values
+    var detailsBtn = document.querySelector('[data-bs-target="#detailsModal"]');
+    var modal = document.getElementById('detailsModal');
+    var form = document.getElementById('detailsModalForm');
+    var fields = [
+      {modal: 'modalCharacterName', main: 'characterName'},
+      {modal: 'modalHomeland', main: 'homeland'},
+      {modal: 'modalOccupation', main: 'occupation'},
+      {modal: 'modalRace', main: 'race'}
+    ];
+    modal.addEventListener('show.bs.modal', function () {
+      fields.forEach(function(f) {
+        document.getElementById(f.modal).value = document.getElementById(f.main).value;
+      });
+    });
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      fields.forEach(function(f) {
+        document.getElementById(f.main).value = document.getElementById(f.modal).value;
+      });
+      var modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+    });
+
+    // Attributes modal logic
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function generateRandomRolls() {
+      let rolls = [];
+      for (let i = 0; i < 6; i++) {
+        rolls.push(getRandomInt(3, 18));
+      }
+      return rolls;
+    }
+    const standardArray = [14, 12, 11, 10, 9, 7];
+    let currentNumbers = [];
+    let assigned = {STR: null, DEX: null, CON: null, INT: null, WIS: null, CHA: null};
+
+    function renderAssignableNumbers() {
+      const container = document.getElementById('assignableNumbers');
+      container.innerHTML = '';
+      currentNumbers.forEach((num, idx) => {
+        // Only show numbers not currently assigned
+        if (!Object.values(assigned).includes(num)) {
+          const pill = document.createElement('span');
+          pill.className = 'badge bg-primary text-light draggable-num';
+          pill.textContent = num;
+          pill.setAttribute('draggable', 'true');
+          pill.dataset.value = num;
+          pill.dataset.idx = idx;
+          pill.ondragstart = function(e) {
+            e.dataTransfer.setData('text/plain', num);
+            e.dataTransfer.setData('source', 'list');
+          };
+          container.appendChild(pill);
+        }
+      });
+    }
+
+    function clearAttributeFields() {
+      assigned = {STR: null, DEX: null, CON: null, INT: null, WIS: null, CHA: null};
+      document.querySelectorAll('.droppable-attr').forEach(function(input) {
+        input.value = '';
+      });
+      renderAssignableNumbers();
+    }
+
+    function setNumbersAndRender(nums) {
+      currentNumbers = nums.slice();
+      clearAttributeFields();
+    }
+
+    function handleDrop(e, attr) {
+      e.preventDefault();
+      const num = parseInt(e.dataTransfer.getData('text/plain'));
+      // If already assigned, ignore
+      if (Object.values(assigned).includes(num)) return;
+      assigned[attr] = num;
+      document.getElementById('assign' + attr).value = num;
+      renderAssignableNumbers();
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+    }
+
+    // Allow dragging from attribute field back to list
+    function makeAttributeFieldsDroppable() {
+      document.querySelectorAll('.droppable-attr').forEach(function(input) {
+        const attr = input.dataset.attr;
+        input.ondragover = handleDragOver;
+        input.ondrop = function(e) { handleDrop(e, attr); };
+        // Allow dragging value back to list
+        input.ondragstart = function(e) {
+          if (input.value) {
+            e.dataTransfer.setData('text/plain', input.value);
+            e.dataTransfer.setData('source', 'attr');
+            e.dataTransfer.setData('attr', attr);
+          }
+        };
+        input.setAttribute('draggable', 'true');
+        input.onclick = function() {
+          // Clicking clears the field and returns value to pool
+          if (input.value) {
+            assigned[attr] = null;
+            input.value = '';
+            renderAssignableNumbers();
+          }
+        };
+      });
+      // Make the assignableNumbers container droppable for returning numbers
+      const assignableNumbers = document.getElementById('assignableNumbers');
+      assignableNumbers.ondragover = handleDragOver;
+      assignableNumbers.ondrop = function(e) {
+        e.preventDefault();
+        if (e.dataTransfer.getData('source') === 'attr') {
+          const attr = e.dataTransfer.getData('attr');
+          assigned[attr] = null;
+          document.getElementById('assign' + attr).value = '';
+          renderAssignableNumbers();
+        }
+      };
+    }
+
+    var attributesModal = document.getElementById('attributesModal');
+    attributesModal.addEventListener('show.bs.modal', function () {
+      setNumbersAndRender(generateRandomRolls());
+      makeAttributeFieldsDroppable();
+    });
+    document.getElementById('randomRollsBtn').onclick = function() {
+      setNumbersAndRender(generateRandomRolls());
+    };
+    document.getElementById('arrayBtn').onclick = function() {
+      setNumbersAndRender(standardArray);
+    };
+    // On modal close, assign values to main page
+    attributesModal.addEventListener('hidden.bs.modal', function () {
+      const attrs = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+      attrs.forEach(function(attr) {
+        const modalVal = document.getElementById('assign' + attr).value;
+        if (modalVal) {
+          document.getElementById(attr.toLowerCase()).value = modalVal;
+        }
+      });
+    });
+
+    // Background modal logic
+    var backgroundModal = document.getElementById('backgroundModal');
+    backgroundModal.addEventListener('show.bs.modal', function () {
+      const listDiv = document.getElementById('backgroundsList');
+      listDiv.innerHTML = '<div class="text-muted">Loading backgrounds...</div>';
+      fetch('/api/backgrounds/worlds-without-number').then(r => r.json()).then(data => {
+        if (!data.length) {
+          listDiv.innerHTML = '<div class="text-danger">No backgrounds found for Worlds Without Number.</div>';
+          return;
+        }
+        listDiv.innerHTML = '';
+        data.forEach(bg => {
+          const row = document.createElement('div');
+          row.className = 'form-check mb-2';
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.className = 'form-check-input';
+          input.name = 'backgroundRadio';
+          input.id = 'bg_' + bg.id;
+          input.value = bg.name;
+          input.onclick = function() {
+            document.getElementById('background').value = bg.name;
+            document.getElementById('backgroundModalLabel').textContent = 'Select Background';
+            // Optionally close modal on select:
+            // bootstrap.Modal.getInstance(backgroundModal).hide();
+          };
+          const label = document.createElement('label');
+          label.className = 'form-check-label';
+          label.htmlFor = input.id;
+          label.innerHTML = '<b>' + bg.name + '</b><br><span class="text-muted">' + bg.description + '</span>';
+          row.appendChild(input);
+          row.appendChild(label);
+          listDiv.appendChild(row);
+        });
+      });
+    });
+  });
+</script>
+{% endblock %} 

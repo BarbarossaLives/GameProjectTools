@@ -16,7 +16,7 @@
                 <h5 class="card-title mb-0">Add New Focus</h5>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="/foci">
                     <div class="mb-3">
                         <label for="focusName" class="form-label">Name</label>
                         <input type="text" class="form-control" id="focusName" name="focus_name" placeholder="Enter focus name" required>
@@ -56,7 +56,26 @@
                 <h5 class="card-title mb-0">Foci List</h5>
             </div>
             <div class="card-body">
-                <p>Foci will be displayed here.</p>
+                {% if foci %}
+                    <div class="list-group list-group-flush">
+                        {% for focus in foci %}
+                        <div class="list-group-item bg-dark text-light border-secondary">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0">{{ focus.name }}</h6>
+                                    <small class="text-muted">{{ focus.system }}</small>
+                                </div>
+                            </div>
+                            <div class="mt-2" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                 title="Description: {{ focus.description }}&#10;Level 1: {{ focus.level_1 }}&#10;Level 2: {{ focus.level_2 }}">
+                                <small class="text-info">Hover for details</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No foci added yet.</p>
+                {% endif %}
             </div>
         </div>
     </div>

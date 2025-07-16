@@ -16,10 +16,10 @@
                 <h5 class="card-title mb-0">Add New Skill</h5>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="/skills">
                     <div class="mb-3">
-                        <label for="skillName" class="form-label">Skill Name</label>
-                        <input type="text" class="form-control" id="skillName" placeholder="Enter skill name">
+                        <label for="name" class="form-label">Skill Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter skill name" required>
                     </div>
                     <div class="mb-3">
                         <label for="system" class="form-label">System</label>
@@ -33,8 +33,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="skillDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="skillDescription" rows="3" placeholder="Enter skill description"></textarea>
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter skill description" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Add Skill</button>
                 </form>
@@ -48,9 +48,33 @@
                 <h5 class="card-title mb-0">Skills List</h5>
             </div>
             <div class="card-body">
-                <p>Skills will be displayed here.</p>
+                {% if skills %}
+                    <div class="list-group list-group-flush">
+                        {% for skill in skills %}
+                        <div class="list-group-item bg-dark text-light border-secondary mb-3 d-flex w-100 justify-content-between align-items-center">
+                            <h6 class="mb-1">
+                              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="wide-tooltip" title="{{ skill.description|e }}">
+                                {{ skill.name }}
+                              </span>
+                            </h6>
+                            <small class="text-muted ms-2">{{ skill.system }}</small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No skills added yet.</p>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+</script>
 {% endblock %} 

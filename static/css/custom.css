@@ -1,0 +1,10 @@
+/* Extra small form control and label for character creation page */
+.form-control-xs {
+  padding: 0.1rem 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  height: 1.5rem;
+}
+.label-xs {
+  font-size: 0.75rem;
+} 
