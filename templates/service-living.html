@@ -16,7 +16,7 @@
                 <h5 class="card-title mb-0">Add New Service or Living Expense</h5>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="/service-living">
                     <div class="mb-3">
                         <label for="serviceName" class="form-label">Name</label>
                         <input type="text" class="form-control" id="serviceName" name="name" placeholder="Enter name">
@@ -47,7 +47,30 @@
                 <h5 class="card-title mb-0">Services and Living Expenses Library</h5>
             </div>
             <div class="card-body">
-                <p class="text-muted">This page will list and manage services and living expenses for your TTRPG campaigns.</p>
+                {% if services %}
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>System</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for service in services %}
+                                <tr>
+                                    <td>{{ service.name }}</td>
+                                    <td>{{ service.system }}</td>
+                                    <td>{{ service.cost }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No services or living expenses found. Add some using the form on the left.</p>
+                {% endif %}
             </div>
         </div>
     </div>

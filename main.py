@@ -161,6 +161,31 @@ def init_database():
         )
     ''')
     
+    # Create armor table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS armor (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            system TEXT NOT NULL,
+            type TEXT NOT NULL,
+            ac TEXT NOT NULL,
+            cost TEXT NOT NULL,
+            weight TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # Create beasts table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS beasts (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            system TEXT NOT NULL,
+            cost TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
     conn.commit()
     conn.close()
 
@@ -499,6 +524,117 @@ def add_weapon_to_db(weapon_data):
     conn.commit()
     conn.close()
 
+def get_all_armor():
+    """Retrieve all armor from database in alphabetical order"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM armor ORDER BY name ASC')
+    rows = cursor.fetchall()
+    armor = []
+    for row in rows:
+        armor_item = {
+            "id": row[0],
+            "name": row[1],
+            "system": row[2],
+            "type": row[3],
+            "ac": row[4],
+            "cost": row[5],
+            "weight": row[6]
+        }
+        armor.append(armor_item)
+    conn.close()
+    return armor
+
+def add_armor_to_db(armor_data):
+    """Add a new armor item to the database"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO armor (
+            id, name, system, type, ac, cost, weight
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        armor_data["id"],
+        armor_data["name"],
+        armor_data["system"],
+        armor_data["type"],
+        armor_data["ac"],
+        armor_data["cost"],
+        armor_data["weight"]
+    ))
+    conn.commit()
+    conn.close()
+
+def get_all_beasts():
+    """Retrieve all beasts from database in alphabetical order"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM beasts ORDER BY name ASC')
+    rows = cursor.fetchall()
+    beasts = []
+    for row in rows:
+        beast = {
+            "id": row[0],
+            "name": row[1],
+            "system": row[2],
+            "cost": row[3]
+        }
+        beasts.append(beast)
+    conn.close()
+    return beasts
+
+def add_beast_to_db(beast_data):
+    """Add a new beast to the database"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO beasts (
+            id, name, system, cost
+        ) VALUES (?, ?, ?, ?)
+    ''', (
+        beast_data["id"],
+        beast_data["name"],
+        beast_data["system"],
+        beast_data["cost"]
+    ))
+    conn.commit()
+    conn.close()
+
+def get_all_services():
+    """Retrieve all services from database in alphabetical order"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM services ORDER BY name ASC')
+    rows = cursor.fetchall()
+    services = []
+    for row in rows:
+        service = {
+            "id": row[0],
+            "name": row[1],
+            "system": row[2],
+            "cost": row[3]
+        }
+        services.append(service)
+    conn.close()
+    return services
+
+def add_service_to_db(service_data):
+    """Add a new service to the database"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO services (
+            id, name, system, cost
+        ) VALUES (?, ?, ?, ?)
+    ''', (
+        service_data["id"],
+        service_data["name"],
+        service_data["system"],
+        service_data["cost"]
+    ))
+    conn.commit()
+    conn.close()
+
 # Initialize database on startup
 init_database()
 
@@ -795,15 +931,93 @@ async def add_weapon(
 
 @app.get("/armor")
 async def armor(request: Request):
-    return templates.TemplateResponse("armor.html", {"request": request})
+    armor_list = get_all_armor()
+    return templates.TemplateResponse("armor.html", {"request": request, "armor": armor_list})
+
+@app.post("/armor")
+async def add_armor(
+    request: Request,
+    name: str = Form(...),
+    system: str = Form(...),
+    type: str = Form(...),
+    ac: str = Form(...),
+    cost: str = Form(...),
+    weight: str = Form(...)
+):
+    # Generate unique ID
+    unique_id = str(uuid.uuid4())
+    
+    # Create armor object
+    armor_item = {
+        "id": unique_id,
+        "name": name,
+        "system": system,
+        "type": type,
+        "ac": ac,
+        "cost": cost,
+        "weight": weight
+    }
+    
+    # Add to database
+    add_armor_to_db(armor_item)
+    
+    return RedirectResponse(url="/armor", status_code=303)
 
 @app.get("/beast-transport")
 async def beast_transport(request: Request):
-    return templates.TemplateResponse("beast-transport.html", {"request": request})
+    beasts_list = get_all_beasts()
+    return templates.TemplateResponse("beast-transport.html", {"request": request, "beasts": beasts_list})
+
+@app.post("/beast-transport")
+async def add_beast(
+    request: Request,
+    name: str = Form(...),
+    system: str = Form(...),
+    cost: str = Form(...)
+):
+    # Generate unique ID
+    unique_id = str(uuid.uuid4())
+    
+    # Create beast object
+    beast = {
+        "id": unique_id,
+        "name": name,
+        "system": system,
+        "cost": cost
+    }
+    
+    # Add to database
+    add_beast_to_db(beast)
+    
+    return RedirectResponse(url="/beast-transport", status_code=303)
 
 @app.get("/service-living")
 async def service_living(request: Request):
-    return templates.TemplateResponse("service-living.html", {"request": request})
+    services_list = get_all_services()
+    return templates.TemplateResponse("service-living.html", {"request": request, "services": services_list})
+
+@app.post("/service-living")
+async def add_service(
+    request: Request,
+    name: str = Form(...),
+    system: str = Form(...),
+    cost: str = Form(...)
+):
+    # Generate unique ID
+    unique_id = str(uuid.uuid4())
+    
+    # Create service object
+    service = {
+        "id": unique_id,
+        "name": name,
+        "system": system,
+        "cost": cost
+    }
+    
+    # Add to database
+    add_service_to_db(service)
+    
+    return RedirectResponse(url="/service-living", status_code=303)
 
 @app.get("/hirelings")
 async def hirelings(request: Request):

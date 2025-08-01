@@ -16,7 +16,7 @@
                 <h5 class="card-title mb-0">Add New Armor</h5>
             </div>
             <div class="card-body">
-                <form method=""POST action="/armor">
+                <form method="POST" action="/armor">
                     <div class="mb-3">
                         <label for="armorName" class="form-label">Name</label>
                         <input type="text" class="form-control" id="armorName" name="name" placeholder="Enter armor name">
@@ -59,7 +59,36 @@
                 <h5 class="card-title mb-0">Armor Library</h5>
             </div>
             <div class="card-body">
-                <p class="text-muted">This page will list and manage armor for your TTRPG campaigns.</p>
+                {% if armor %}
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>System</th>
+                                    <th>Type</th>
+                                    <th>AC</th>
+                                    <th>Cost</th>
+                                    <th>Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in armor %}
+                                <tr>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.system }}</td>
+                                    <td>{{ item.type }}</td>
+                                    <td>{{ item.ac }}</td>
+                                    <td>{{ item.cost }}</td>
+                                    <td>{{ item.weight }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No armor items found. Add some armor using the form on the left.</p>
+                {% endif %}
             </div>
         </div>
     </div>
