@@ -64,9 +64,6 @@ def init_database():
         )
     ''')
     
-    # Drop and recreate classes table to fix schema
-    cursor.execute('DROP TABLE IF EXISTS classes')
-    
     # Create classes table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS classes (
@@ -141,6 +138,23 @@ def init_database():
             name TEXT NOT NULL,
             system TEXT NOT NULL,
             description TEXT NOT NULL,
+            cost TEXT NOT NULL,
+            weight TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # Create weapons table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS weapons (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            system TEXT NOT NULL,
+            damage TEXT NOT NULL,
+            shock TEXT NOT NULL,
+            attribute TEXT NOT NULL,
+            range TEXT NOT NULL,
+            traits TEXT NOT NULL,
             cost TEXT NOT NULL,
             weight TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -438,6 +452,53 @@ def add_adventure_gear_to_db(gear_data):
     conn.commit()
     conn.close()
 
+def get_all_weapons():
+    """Retrieve all weapons from database in alphabetical order"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM weapons ORDER BY name ASC')
+    rows = cursor.fetchall()
+    weapons = []
+    for row in rows:
+        weapon = {
+            "id": row[0],
+            "name": row[1],
+            "system": row[2],
+            "damage": row[3],
+            "shock": row[4],
+            "attribute": row[5],
+            "range": row[6],
+            "traits": row[7],
+            "cost": row[8],
+            "weight": row[9]
+        }
+        weapons.append(weapon)
+    conn.close()
+    return weapons
+
+def add_weapon_to_db(weapon_data):
+    """Add a new weapon to the database"""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO weapons (
+            id, name, system, damage, shock, attribute, range, traits, cost, weight
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        weapon_data["id"],
+        weapon_data["name"],
+        weapon_data["system"],
+        weapon_data["damage"],
+        weapon_data["shock"],
+        weapon_data["attribute"],
+        weapon_data["range"],
+        weapon_data["traits"],
+        weapon_data["cost"],
+        weapon_data["weight"]
+    ))
+    conn.commit()
+    conn.close()
+
 # Initialize database on startup
 init_database()
 
@@ -694,7 +755,43 @@ async def items(request: Request):
 
 @app.get("/weapons")
 async def weapons(request: Request):
-    return templates.TemplateResponse("weapons.html", {"request": request})
+    weapons_list = get_all_weapons()
+    return templates.TemplateResponse("weapons.html", {"request": request, "weapons": weapons_list})
+
+@app.post("/weapons")
+async def add_weapon(
+    request: Request,
+    name: str = Form(...),
+    system: str = Form(...),
+    damage: str = Form(...),
+    shock: str = Form(...),
+    attribute: str = Form(...),
+    range: str = Form(...),
+    traits: str = Form(...),
+    cost: str = Form(...),
+    weight: str = Form(...)
+):
+    # Generate unique ID
+    unique_id = str(uuid.uuid4())
+    
+    # Create weapon object
+    weapon = {
+        "id": unique_id,
+        "name": name,
+        "system": system,
+        "damage": damage,
+        "shock": shock,
+        "attribute": attribute,
+        "range": range,
+        "traits": traits,
+        "cost": cost,
+        "weight": weight
+    }
+    
+    # Add to database
+    add_weapon_to_db(weapon)
+    
+    return RedirectResponse(url="/weapons", status_code=303)
 
 @app.get("/armor")
 async def armor(request: Request):

@@ -16,7 +16,7 @@
                 <h5 class="card-title mb-0">Add New Weapon</h5>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="/weapons">
                     <div class="mb-3">
                         <label for="weaponName" class="form-label">Name</label>
                         <input type="text" class="form-control" id="weaponName" name="name" placeholder="Enter weapon name">
@@ -71,7 +71,42 @@
                 <h5 class="card-title mb-0">Weapons Library</h5>
             </div>
             <div class="card-body">
-                <p class="text-muted">This page will list and manage weapons for your TTRPG campaigns.</p>
+                {% if weapons %}
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>System</th>
+                                    <th>Damage</th>
+                                    <th>Shock</th>
+                                    <th>Attribute</th>
+                                    <th>Range</th>
+                                    <th>Traits</th>
+                                    <th>Cost</th>
+                                    <th>Weight</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for weapon in weapons %}
+                                <tr>
+                                    <td>{{ weapon.name }}</td>
+                                    <td>{{ weapon.system }}</td>
+                                    <td>{{ weapon.damage }}</td>
+                                    <td>{{ weapon.shock }}</td>
+                                    <td>{{ weapon.attribute }}</td>
+                                    <td>{{ weapon.range }}</td>
+                                    <td>{{ weapon.traits }}</td>
+                                    <td>{{ weapon.cost }}</td>
+                                    <td>{{ weapon.weight }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No weapons added yet. Add your first weapon using the form on the left.</p>
+                {% endif %}
             </div>
         </div>
     </div>
